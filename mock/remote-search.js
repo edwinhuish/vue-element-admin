@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 
 const NameList = []
+const PartnershipList = []
 const count = 100
 
 for (let i = 0; i < count; i++) {
@@ -9,6 +10,17 @@ for (let i = 0; i < count; i++) {
   }))
 }
 NameList.push({ name: 'mock-Pan' })
+
+PartnershipList.push({
+  id: 1,
+  name: 'Client'
+}, {
+  id: 2,
+  name: 'Supplier'
+}, {
+  id: 3,
+  name: 'Partner'
+})
 
 export default [
   // username search
@@ -45,6 +57,23 @@ export default [
             'status|1': ['success', 'pending']
           }]
         }
+      }
+    }
+  },
+
+  // partnerships search
+  {
+    url: '/search/partnerships',
+    type: 'get',
+    response: config => {
+      const { name } = config.query
+      const mockNameList = PartnershipList.filter(item => {
+        const lowerCaseName = item.name.toLowerCase()
+        return !(name && lowerCaseName.indexOf(name.toLowerCase()) < 0)
+      })
+      return {
+        code: 20000,
+        data: { items: mockNameList }
       }
     }
   }

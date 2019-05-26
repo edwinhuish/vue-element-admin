@@ -8,7 +8,7 @@ export function fetchList(query) {
   })
 }
 
-export function fetchCllients(id) {
+export function fetchClient(id) {
   return request({
     url: '/clients/detail',
     method: 'get',
@@ -24,18 +24,18 @@ export function fetchPv(pv) {
   })
 }
 
-export function createCllients(data) {
-  return request({
-    url: '/clients/create',
-    method: 'post',
-    data
-  })
-}
-
-export function updateCllients(data) {
-  return request({
-    url: '/clients/update',
-    method: 'post',
-    data
-  })
+export function updateClient(data) {
+  if (data.id) {
+    return request({
+      url: '/clients/' + data.id,
+      method: 'put',
+      data
+    })
+  } else {
+    return request({
+      url: '/clients',
+      method: 'post',
+      data
+    })
+  }
 }

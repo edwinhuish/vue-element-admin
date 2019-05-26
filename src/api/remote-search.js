@@ -15,3 +15,11 @@ export function transactionList(query) {
     params: query
   })
 }
+
+export function getPartnerships(name) {
+  return request({
+    url: '/search/partnerships',
+    method: 'get',
+    params: { name }
+  })
+}
